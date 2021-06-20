@@ -64,16 +64,17 @@
             app:layout_constraintVertical_bias=".3"
             android:background="@drawable/edit_text_bg"
             app:layout_constraintHorizontal_bias=".5"
-            android:hint="Username"
+            android:hint="Korisničko ime"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:maxLength="13"/>
 
         <EditText
             android:id="@+id/password_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Lozinka"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -85,16 +86,18 @@
             app:layout_constraintTop_toBottomOf="@+id/username_login"
             android:background="@drawable/edit_text_bg"
             app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".8" />
+            app:layout_constraintWidth_percent=".8"
+            android:inputType="textPassword"
+            android:maxLength="13"/>
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
-            android:text="Login"
+            android:text="PRIJAVA"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,30 +111,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
-            android:text="Register"
+            android:text="Registracija"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_button"
             app:layout_constraintVertical_bias=".1"
             app:layout_constraintWidth_percent=".8" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forget Password"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintHorizontal_bias="1"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password_login"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_login" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

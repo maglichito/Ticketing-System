@@ -7,6 +7,8 @@ public class API {
     public String getLogin() {
         return login;
     }
+
+    public String getSignup() { return signup; }
 }
 
 

@@ -3,6 +3,7 @@ package com.example.ticketing_system;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -39,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        statusBar();
+
+
         password_login = findViewById(R.id.password_login);
         username_login = findViewById(R.id.username_login);
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
@@ -68,6 +72,14 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void statusBar(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.black,this.getTheme()));
+        }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+        }
+    }
+
     private void userLogin() {
         //URL
         String URL = api.getLogin();
@@ -76,13 +88,13 @@ public class LoginActivity extends AppCompatActivity {
         final String password = password_login.getText().toString();
         //validating inputs
         if (TextUtils.isEmpty(username)) {
-            username_login.setError("Please enter your username");
-            password_login.requestFocus();
+            username_login.setError("Unesite username!");
+            username_login.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            username_login.setError("Please enter your password");
+            password_login.setError("Unesite lozinku!");
             password_login.requestFocus();
             return;
         }
