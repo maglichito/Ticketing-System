@@ -132,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 //starting the profile activity
                                 finish();
+                                bar.setVisibility(View.INVISIBLE);
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getJSONObject("response").getString("message"), Toast.LENGTH_SHORT).show();
