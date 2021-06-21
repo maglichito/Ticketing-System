@@ -8,6 +8,8 @@ import com.example.ticketing_system.LoginActivity;
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
     private static final String KEY_USERNAME = "keyusername";
+    private static final String KEY_NAME = "keyname";
+    private static final String KEY_LASTNAME = "lastkeyname";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_ID = "keyid";
     private static SharedPrefManager mInstance;
@@ -30,6 +32,8 @@ public class SharedPrefManager {
         editor.putInt(KEY_ID, user.getId());
         editor.putString(KEY_USERNAME, user.getUsername());
         editor.putString(KEY_EMAIL, user.getEmail());
+        editor.putString(KEY_NAME, user.getName());
+        editor.putString(KEY_LASTNAME, user.getLastname());
         editor.apply();
     }
 
@@ -45,7 +49,9 @@ public class SharedPrefManager {
         return new User(
                 sharedPreferences.getInt(KEY_ID, -1),
                 sharedPreferences.getString(KEY_USERNAME, null),
-                sharedPreferences.getString(KEY_EMAIL, null)
+                sharedPreferences.getString(KEY_EMAIL, null),
+                sharedPreferences.getString(KEY_NAME, null),
+                sharedPreferences.getString(KEY_LASTNAME, null)
         );
     }
 

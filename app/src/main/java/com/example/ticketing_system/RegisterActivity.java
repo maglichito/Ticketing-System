@@ -3,11 +3,13 @@ package com.example.ticketing_system;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -32,12 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
     EditText name_register,surname_register,username_register, email_register, password_register,retype_password_register;
     Button back_button;
     Button register_button;
+    ProgressBar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        statusBar();
         // Buttons
         name_register = findViewById(R.id.name_register);
         surname_register = findViewById(R.id.surname_register);
@@ -47,6 +50,9 @@ public class RegisterActivity extends AppCompatActivity {
         back_button = (Button) findViewById(R.id.back_button_reg);
         register_button = (Button) findViewById(R.id.register_button_reg);
         retype_password_register = findViewById(R.id.retype_password_register);
+        bar = findViewById(R.id.progress_bar_register);
+        bar.setVisibility(View.INVISIBLE);
+
 
         back_button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -65,6 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
     public void LoginActivity(){
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
+    }
+    private void statusBar(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.black,this.getTheme()));
+        }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+        }
     }
 
     public void registerUser(){
@@ -117,6 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
             retype_password_register.requestFocus();
             return;
         }
+        bar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -134,7 +148,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             } else {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), obj.getJSONObject("response").getString("message"), Toast.LENGTH_SHORT).show();
+                                bar.setVisibility(View.INVISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
