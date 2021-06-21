@@ -21,7 +21,7 @@ function validate(){
         return "Korisnicko ime je obavezno polje!";
     }
 
-    if(empty($_POST['password'])){
+    if(empty($_POST['password']) || strlen($_POST['password']) < 5 || strlen($_POST['password']) > 15 ){
         return "Lozinka je obavezno polje!";
     }
 }
@@ -108,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die();
         }
     }else{
+        #ako nisu popunjena sva polja
         $error["status"] = "405";
         $error["message"] = validate();
         $error["error"] = true;

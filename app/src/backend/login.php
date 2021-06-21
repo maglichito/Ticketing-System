@@ -50,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_r["id"] = $user["id"];
         $user_r["username"] = $user["username"];
         $user_r["email"] = $user["email"];
+        $user_r["firstname"] = $user["first_name"];
+        $user_r["lastname"] = $user["last_name"];
 
         $response["response"] = $err;
         $response["user"] = $user_r;
