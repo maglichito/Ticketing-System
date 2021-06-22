@@ -200,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean checkConnectivity(){
         try {
             String command = "ping -c 1 google.com";
-            return (Runtime.getRuntime().exec(command).waitFor() == 0);
+            return (Runtime.getRuntime().exec(command).waitFor() == 1);
         } catch (Exception e) {
             return false;
         }
