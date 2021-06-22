@@ -125,8 +125,6 @@ public class LoginActivity extends AppCompatActivity {
                             //if no error in response
                             if (obj.getJSONObject("response").getBoolean("error") == false) {
 
-                                Toast.makeText(getApplicationContext(), obj.getJSONObject("response").getString("message"), Toast.LENGTH_SHORT).show();
-
                                 //getting the user from the response
                                 JSONObject userJson = obj.getJSONObject("user");
 

@@ -9,4 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="soft_black">#FF232b2b</color>
+    <color name="bright_red">#FFae0700</color>
+    <color name="white1">#FFe8eae6</color>
+
 </resources>

@@ -3,11 +3,14 @@
 
     <item android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Početna"></item>
+        android:title="Početna"
+        android:fontFamily="@font/cabin"></item>
     <item android:id="@+id/nav_profile"
         android:icon="@drawable/ic_baseline_people_alt_24"
-        android:title="Profil"></item>
+        android:title="Profil"
+        android:fontFamily="@font/cabin"></item>
     <item android:id="@+id/nav_tickets"
         android:icon="@drawable/ic_baseline_attach_money_24"
-        android:title="Moje Karte"></item>
+        android:title="Moje Karte"
+        android:fontFamily="@font/cabin"></item>
 </menu>

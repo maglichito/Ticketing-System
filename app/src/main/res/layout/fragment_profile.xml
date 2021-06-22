@@ -32,9 +32,10 @@
             android:text="Fudbalski Savez Crne Gore"
             android:layout_marginTop="6dp"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/cabin"/>
         <TextView
             android:id="@+id/header1"
             android:layout_width="wrap_content"
@@ -44,9 +45,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="6dp"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/cabin"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -73,9 +75,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="6dp"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/cabin"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -90,9 +93,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/cabin"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -107,9 +111,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/cabin"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -124,9 +129,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/cabin"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -155,7 +161,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_bg"
             android:hint="Stara lozinka"
-            android:textColor="@color/white"
+            android:textColor="@color/bright_red"
             android:textColorHint="@color/white"
             android:layout_marginTop="10dp"
             android:paddingLeft="20dp"
@@ -163,7 +169,9 @@
             android:paddingBottom="10dp"
             android:maxLength="15"
             android:singleLine="true"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:fontFamily="@font/cabin"
+            android:textSize="19sp"/>
         <EditText
             android:id="@+id/newpass_change_profile"
             android:layout_width="match_parent"
@@ -171,14 +179,16 @@
             android:background="@drawable/edit_text_bg"
             android:hint="Nova lozinka"
             android:textColorHint="@color/white"
-            android:textColor="@color/white"
+            android:textColor="@color/bright_red"
             android:layout_marginTop="15dp"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:maxLength="15"
             android:singleLine="true"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:fontFamily="@font/cabin"
+            android:textSize="19sp"/>
         <Button
             android:id="@+id/change_button"
             android:layout_width="match_parent"
@@ -188,7 +198,8 @@
             android:layout_marginTop="10dp"
             android:textSize="16sp"
             android:textStyle="normal"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:fontFamily="@font/cabin" />
         <Button
             android:id="@+id/logout_profile"
             android:layout_width="match_parent"
@@ -198,7 +209,9 @@
             android:layout_marginTop="10dp"
             android:textSize="16sp"
             android:textStyle="normal"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:fontFamily="@font/cabin"
+            />
     </LinearLayout>
 
 </RelativeLayout>
