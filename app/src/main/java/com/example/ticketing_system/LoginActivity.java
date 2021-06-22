@@ -2,7 +2,10 @@ package com.example.ticketing_system;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +29,7 @@ import com.example.ticketing_system.data.VolleySingleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +62,14 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                userLogin();
+
+                // If device connected to network then attempt login
+                if(isNetworkAvailable()){
+                    userLogin();
+                }else{
+                    Toast.makeText(getApplicationContext(), "You are not connected to a network.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -146,7 +157,16 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        // User failed to connect to server for some reason
+                        // Pinging google if there is connection = it is server side issue(Excepting google servers to be always up ;) )
+                        // If there is no connection to google, user network has no connectivity
+                        if(checkConnectivity()){
+                            Toast.makeText(getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Connection timed out, check your network.", Toast.LENGTH_SHORT).show();
+                        }
+                        bar.setVisibility(View.INVISIBLE);
                     }
                 })
         {
@@ -160,5 +180,29 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+
+    // Checking if device is connected to network
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn !=null && mobileConn.isConnected())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    // If user is connected to network we want to check if it is connected to internet
+    public boolean checkConnectivity(){
+        try {
+            String command = "ping -c 1 google.com";
+            return (Runtime.getRuntime().exec(command).waitFor() == 0);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
