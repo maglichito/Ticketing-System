@@ -14,7 +14,7 @@
         android:src="@drawable/bg1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".27"
+        app:layout_constraintHeight_percent=".28"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/vie_bg"
-        app:layout_constraintHeight_percent=".78"
+        app:layout_constraintHeight_percent=".76"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
             app:layout_constraintVertical_bias=".3"
             android:background="@drawable/edit_text_bg"
             app:layout_constraintHorizontal_bias=".5"
-            android:hint="Korisničko ime"
+            android:hint="Username"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -72,7 +72,9 @@
             android:singleLine="true"
             android:fontFamily="@font/cabin"
             android:textColor="@color/bright_red"
-            android:textSize="22sp"/>
+            android:textSize="22sp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_people_alt_24"/>
 
         <ProgressBar
             android:id="@+id/progress_bar_login"
@@ -85,7 +87,7 @@
             android:id="@+id/password_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Lozinka"
+            android:hint="Password"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -103,14 +105,16 @@
             android:singleLine="true"
             android:fontFamily="@font/cabin"
             android:textSize="22sp"
-            android:textColor="@color/bright_red"/>
+            android:textColor="@color/bright_red"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_baseline_lock_24" />
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
-            android:text="PRIJAVA"
+            android:text="LOG IN"
             android:textSize="16sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -127,7 +131,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
-            android:text="Registracija"
+            android:text="Sign up"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="normal"
@@ -145,25 +149,11 @@
         android:id="@+id/imageView2"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/fscg"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintVertical_bias=".3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fudbalski Savez Crne Gore"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        app:layout_constraintVertical_bias=".2"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        android:fontFamily="@font/cabin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

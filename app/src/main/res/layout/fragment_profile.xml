@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white1">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -10,50 +11,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/fscg"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/fscg" />
+
 
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fscg"
         android:orientation="vertical"
         android:gravity="center">
-        <TextView
-            android:id="@+id/header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fudbalski Savez Crne Gore"
-            android:layout_marginTop="6dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/cabin"/>
         <TextView
             android:id="@+id/header1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Podaci"
+            android:text="PROFILE"
             android:layout_below="@+id/header"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="6dp"
-            android:textColor="@color/white"
+            android:textColor="@color/pink"
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/cabin"/>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="3dp"
             android:layout_marginTop="8dp"
-            android:background="@android:color/white"/>
+            android:background="@color/bright_red"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear2"
@@ -62,156 +45,155 @@
         android:layout_below="@+id/linear1"
         android:gravity="left"
         android:orientation="vertical"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        >
-        <TextView
-            android:id="@+id/name_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:layout_below="@+id/header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/cabin"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/white"/>
-        <TextView
-            android:id="@+id/lastname_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:layout_below="@+id/header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/cabin"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/white"/>
-        <TextView
-            android:id="@+id/username_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:layout_below="@+id/header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/cabin"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/white"/>
-        <TextView
-            android:id="@+id/email_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:layout_below="@+id/header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/cabin"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/white"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear2"
-        android:gravity="left"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NAME"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/pink"
+            android:textStyle="bold"></TextView>
+        <EditText
+            android:id="@+id/name_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_bg"
+            android:hint="First name"
+            android:textColor="@color/bright_red"
+            android:textColorHint="@color/bright_red"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:fontFamily="@font/cabin"
+            android:textSize="19sp"
+
+            android:drawablePadding="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LAST NAME"
+            android:textColor="@color/pink"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"></TextView>
+        <EditText
+            android:id="@+id/lastname_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Last name"
+            android:textColor="@color/bright_red"
+            android:textColorHint="@color/bright_red"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:fontFamily="@font/cabin"
+            android:textSize="19sp"
+            android:drawablePadding="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="USERNAME"
+            android:textColor="@color/pink"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"></TextView>
+        <EditText
+            android:id="@+id/username_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Username"
+            android:textColor="@color/bright_red"
+            android:textColorHint="@color/bright_red"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:fontFamily="@font/cabin"
+            android:textSize="19sp"
+            android:drawablePadding="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EMAIL ADDRESS"
+            android:textColor="@color/pink"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"></TextView>
+        <EditText
+            android:id="@+id/email_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Email address"
+            android:textColor="@color/bright_red"
+            android:textColorHint="@color/bright_red"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:maxLength="30"
+            android:singleLine="true"
+            android:fontFamily="@font/cabin"
+            android:textSize="19sp"
+            android:drawablePadding="5dp"/>
         <ProgressBar
             android:id="@+id/progress_bar_profile"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="5dp"/>
-        <EditText
-            android:id="@+id/oldpass_change_profile"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"></ProgressBar>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_bg"
-            android:hint="Stara lozinka"
-            android:textColor="@color/bright_red"
-            android:textColorHint="@color/white"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:maxLength="15"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:fontFamily="@font/cabin"
-            android:textSize="19sp"/>
-        <EditText
-            android:id="@+id/newpass_change_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_bg"
-            android:hint="Nova lozinka"
-            android:textColorHint="@color/white"
-            android:textColor="@color/bright_red"
-            android:layout_marginTop="15dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:maxLength="15"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:fontFamily="@font/cabin"
-            android:textSize="19sp"/>
-        <Button
-            android:id="@+id/change_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_bg"
-            android:text="Promijeni"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:textColor="@color/white"
-            android:fontFamily="@font/cabin" />
-        <Button
-            android:id="@+id/logout_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_bg"
-            android:text="ODJAVI SE"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:textColor="@color/white"
-            android:fontFamily="@font/cabin"
-            />
+            android:layout_gravity="left"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+            <Button
+                android:id="@+id/change_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_bg"
+                android:text="Submit"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:fontFamily="@font/cabin" />
+            <Button
+                android:id="@+id/password_change_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_bg"
+                android:text="CHANGE PASSWORD"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:fontFamily="@font/cabin" />
+            <Button
+                android:id="@+id/logout_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_bg"
+                android:text="LOG OUT"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:fontFamily="@font/cabin"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -74,9 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void statusBar(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black,this.getTheme()));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.pink,this.getTheme()));
         }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.pink));
         }
     }
 
@@ -93,40 +93,40 @@ public class RegisterActivity extends AppCompatActivity {
 
         //first we will do the validations
         if (TextUtils.isEmpty(name)) {
-            name_register.setError("Unesite ime");
+            name_register.setError("This field is required.");
             name_register.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(surname)) {
-            surname_register.setError("Unesite prezime!");
+            surname_register.setError("This field is required.");
             surname_register.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(username)) {
-            username_register.setError("Unesite username!");
+            username_register.setError("This field is required.");
             username_register.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(email)) {
-            email_register.setError("Unesite e-mail!");
+            email_register.setError("This field is required.");
             email_register.requestFocus();
             return;
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            email_register.setError("Unesite validan e-mail!");
+            email_register.setError("Enter valid e-mail.");
             email_register.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password) || password.length() < 5) {
-            password_register.setError("Lozinka mora imati barem 5 karaktera!");
+            password_register.setError("Password must have at least 5 characters.");
             password_register.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(password) || !retype_password.equalsIgnoreCase(password)) {
-            retype_password_register.setError("Lozinke se ne podudaraju!");
+            retype_password_register.setError("Passwords do not match.");
             retype_password_register.requestFocus();
             return;
         }
@@ -141,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
                             //if no error in response
-                            if (obj.getJSONObject("response").getBoolean("error") == false) {
+                            if (!obj.getJSONObject("response").getBoolean("error")) {
 
                                 Toast.makeText(getApplicationContext(), obj.getJSONObject("response").getString("message"), Toast.LENGTH_SHORT).show();
                                 //starting the login activity

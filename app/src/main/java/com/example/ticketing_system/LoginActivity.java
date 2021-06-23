@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         bar.setVisibility(View.INVISIBLE);
         password_login = findViewById(R.id.password_login);
         username_login = findViewById(R.id.username_login);
+
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
@@ -87,9 +88,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void statusBar(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black,this.getTheme()));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.pink,this.getTheme()));
         }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.pink));
         }
     }
 
@@ -102,13 +103,13 @@ public class LoginActivity extends AppCompatActivity {
         final String password = password_login.getText().toString();
         //validating inputs
         if (TextUtils.isEmpty(username)) {
-            username_login.setError("Unesite username!");
+            username_login.setError("This field is required!");
             username_login.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            password_login.setError("Unesite lozinku!");
+            password_login.setError("This field is required!");
             password_login.requestFocus();
             return;
         }
@@ -123,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
                             //if no error in response
-                            if (obj.getJSONObject("response").getBoolean("error") == false) {
+                            if (!obj.getJSONObject("response").getBoolean("error")) {
 
                                 //getting the user from the response
                                 JSONObject userJson = obj.getJSONObject("user");
@@ -157,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
 
                         // User failed to connect to server for some reason
-                        // Pinging google if there is connection = it is server side issue(Excepting google servers to be always up ;) )
+                        // Pinging google if there is response = it is server side issue(Excepting google servers to be always up ;) )
                         // If there is no connection to google, user network has no connectivity
                         if(checkConnectivity()){
                             Toast.makeText(getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_SHORT).show();
