@@ -227,14 +227,19 @@ public class ProfileFragment extends Fragment{
         final String old_password = oldpassword.getText().toString();
         final String new_password = newpassword.getText().toString();
         //validating inputs
-        if (TextUtils.isEmpty(old_password)) {
-            oldpassword.setError("This field is required.");
+        if (TextUtils.isEmpty(old_password) || new_password.length() < 5) {
+            oldpassword.setError("Password must have at least 5 characters.");
             oldpassword.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(new_password) || new_password.length() < 5) {
-            newpassword.setError("This field is required.");
+            newpassword.setError("Password must have at least 5 characters.");
+            newpassword.requestFocus();
+            return;
+        }
+        if (old_password.equals(new_password)) {
+            newpassword.setError("Passwords are same.");
             newpassword.requestFocus();
             return;
         }

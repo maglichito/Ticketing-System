@@ -158,7 +158,9 @@
             android:inputType="textPassword"
             android:maxLength="15"
             android:singleLine="true"
-            android:fontFamily="@font/cabin"/>
+            android:fontFamily="@font/cabin"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="5dp"/>
         <EditText
             android:id="@+id/retype_password_register"
             android:layout_width="0dp"
@@ -179,7 +181,9 @@
             android:inputType="textPassword"
             android:maxLength="15"
             android:singleLine="true"
-            android:fontFamily="@font/cabin"/>
+            android:fontFamily="@font/cabin"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="5dp"/>
 
 
         <Button
