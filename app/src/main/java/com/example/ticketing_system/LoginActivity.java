@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.ticketing_system.data.API;
+import com.example.ticketing_system.data.Network;
 import com.example.ticketing_system.data.SharedPrefManager;
 import com.example.ticketing_system.data.User;
 import com.example.ticketing_system.data.VolleySingleton;
@@ -36,22 +37,26 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText username_login, password_login;
-    API api = new API();
-    Button register_button;
-    Button login_button;
-    ProgressBar bar;
+    private EditText username_login, password_login;
+    private API api = new API();
+    private Button register_button;
+    private Button login_button;
+    private ProgressBar bar;
+    private Network network = new Network(LoginActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         statusBar();
+
         bar = findViewById(R.id.progress_bar_login);
         bar.setVisibility(View.INVISIBLE);
         password_login = findViewById(R.id.password_login);
         username_login = findViewById(R.id.username_login);
 
+        // If user is logged in redirect to MainActivity
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
@@ -65,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view){
 
                 // If device connected to network then attempt login
-                if(isNetworkAvailable()){
+                if(network.isNetworkAvailable()){
                     userLogin();
                 }else{
                     Toast.makeText(getApplicationContext(), "You are not connected to a network.", Toast.LENGTH_SHORT).show();
@@ -81,11 +86,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Start RegisterActivity
     public void RegisterActivity(){
         Intent intent = new Intent(this,RegisterActivity.class);
         startActivity(intent);
     }
 
+
+    // Setting status bar to pink to match theme
     private void statusBar(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             getWindow().setStatusBarColor(getResources().getColor(R.color.pink,this.getTheme()));
@@ -94,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // this method will log user in
     private void userLogin() {
 
         //URL
@@ -129,6 +139,8 @@ public class LoginActivity extends AppCompatActivity {
                                 //getting the user from the response
                                 JSONObject userJson = obj.getJSONObject("user");
 
+
+
                                 //creating a new user object
                                 User user = new User(
                                         userJson.getInt("id"),
@@ -157,10 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        // User failed to connect to server for some reason
-                        // Pinging google if there is response = it is server side issue(Excepting google servers to be always up ;) )
-                        // If there is no connection to google, user network has no connectivity
-                        if(checkConnectivity()){
+                        if(network.checkConnectivity()){
                             Toast.makeText(getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(getApplicationContext(), "Connection timed out, check your network.", Toast.LENGTH_SHORT).show();
@@ -179,29 +188,5 @@ public class LoginActivity extends AppCompatActivity {
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }
-
-
-    // Checking if device is connected to network
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn !=null && mobileConn.isConnected())){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    // If user is connected to network we want to check if it is connected to internet
-    public boolean checkConnectivity(){
-        try {
-            String command = "ping -c 1 google.com";
-            return (Runtime.getRuntime().exec(command).waitFor() == 1);
-        } catch (Exception e) {
-            return false;
-        }
     }
 }

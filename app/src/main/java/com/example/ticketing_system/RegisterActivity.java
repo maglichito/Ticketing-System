@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.ticketing_system.data.API;
+import com.example.ticketing_system.data.Network;
 import com.example.ticketing_system.data.SharedPrefManager;
 import com.example.ticketing_system.data.User;
 import com.example.ticketing_system.data.VolleySingleton;
@@ -31,10 +32,11 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText name_register,surname_register,username_register, email_register, password_register,retype_password_register;
-    Button back_button;
-    Button register_button;
-    ProgressBar bar;
+    private EditText name_register,surname_register,username_register, email_register, password_register,retype_password_register;
+    private Button back_button;
+    private Button register_button;
+    private ProgressBar bar;
+    private Network network = new Network(RegisterActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +65,21 @@ public class RegisterActivity extends AppCompatActivity {
         register_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                registerUser();
+                if(network.isNetworkAvailable()){
+                    registerUser();
+                }else{
+                    Toast.makeText(getApplicationContext(), "You are not connected to a network.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
+    // Start login activity
     public void LoginActivity(){
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
+    // Change status bar color to match theme
     private void statusBar(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             getWindow().setStatusBarColor(getResources().getColor(R.color.pink,this.getTheme()));
@@ -80,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    // this method will register user
     public void registerUser(){
         API api = new API();
         String URL = api.getSignup();
@@ -125,11 +134,12 @@ public class RegisterActivity extends AppCompatActivity {
             password_register.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(password) || !retype_password.equalsIgnoreCase(password)) {
+        if (TextUtils.isEmpty(password) || !retype_password.equals(password)) {
             retype_password_register.setError("Passwords do not match.");
             retype_password_register.requestFocus();
             return;
         }
+        // If everything is fine
         bar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
@@ -159,7 +169,12 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        if(network.checkConnectivity()){
+                            Toast.makeText(getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Connection timed out, check your network.", Toast.LENGTH_SHORT).show();
+                        }
+                        bar.setVisibility(View.INVISIBLE);
                     }
                 }) {
             @Override

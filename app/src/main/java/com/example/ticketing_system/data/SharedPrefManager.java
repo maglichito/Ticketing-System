@@ -27,7 +27,6 @@ public class SharedPrefManager {
 
     //this method will store the user data in shared preferences
     public void userLogin(User user) {
-        System.out.println("POZVAN");
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_ID, user.getId());

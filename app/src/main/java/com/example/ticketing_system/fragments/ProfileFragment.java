@@ -24,8 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.ticketing_system.LoginActivity;
+import com.example.ticketing_system.MainActivity;
 import com.example.ticketing_system.R;
 import com.example.ticketing_system.data.API;
+import com.example.ticketing_system.data.Network;
 import com.example.ticketing_system.data.SharedPrefManager;
 import com.example.ticketing_system.data.User;
 import com.example.ticketing_system.data.VolleySingleton;
@@ -38,12 +40,13 @@ import java.util.Map;
 
 public class ProfileFragment extends Fragment{
 
-    ProgressBar bar,bar_change;
-    EditText oldpassword,newpassword,name,lastname,username,email;
-    User u;
-    API api = new API();
-    Button changeButton,logoutButton,password_change,passwordChange_dialog;
-    Dialog myDialog;
+    private ProgressBar bar,bar_change;
+    private EditText oldpassword,newpassword,name,lastname,username,email;
+    private User u;
+    private API api = new API();
+    private Button changeButton,logoutButton,password_change,passwordChange_dialog;
+    private Dialog myDialog;
+    private Network network;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,@Nullable Bundle savedInstanceState){
@@ -62,14 +65,15 @@ public class ProfileFragment extends Fragment{
         email.setText(u.getEmail());
         changeButton = v.findViewById(R.id.change_button);
         logoutButton = v.findViewById(R.id.logout_profile);
+        network = new Network(getActivity());
 
         changeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(isNetworkAvailable()){
+                if(network.isNetworkAvailable()){
                     changeInfo();
                 }else{
-                    Toast.makeText(getActivity().getApplicationContext(), "You are not connected to a network.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "You are not connected to a network.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -101,18 +105,18 @@ public class ProfileFragment extends Fragment{
         passwordChange_dialog.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(isNetworkAvailable()){
+                if(network.isNetworkAvailable()){
                     changePassword();
                 }else{
-                    Toast.makeText(getActivity().getApplicationContext(), "You are not connected to a network.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "You are not connected to a network.", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-
-
         return v;
     }
+
+    // this method will change user information
     private void changeInfo(){
         //URL
         String URL = api.getProf_change();
@@ -150,6 +154,15 @@ public class ProfileFragment extends Fragment{
             email.requestFocus();
             return;
         }
+
+        // If no changes are made do not send request
+        if(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getName().equals(first_name) &&
+                SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getLastname().equals(last_name) &&
+                SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getUsername().equals(user_name) &&
+                SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getEmail().equals(e_mail)){
+            Toast.makeText(getActivity().getApplicationContext(), "Make changes before submitting.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         bar.setVisibility(View.VISIBLE);
         //if everything is fine
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
@@ -177,7 +190,6 @@ public class ProfileFragment extends Fragment{
                                 );
 
                                 //storing the user in shared preferences
-
                                 SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
                                 //starting the profile activity
                                 bar.setVisibility(View.INVISIBLE);
@@ -194,10 +206,10 @@ public class ProfileFragment extends Fragment{
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if(checkConnectivity()){
-                            Toast.makeText(getActivity().getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_SHORT).show();
+                        if(network.checkConnectivity()){
+                            Toast.makeText(getActivity().getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Connection timed out, check your network.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Connection timed out, check your network.", Toast.LENGTH_LONG).show();
                         }
                         bar.setVisibility(View.INVISIBLE);
                     }
@@ -218,6 +230,7 @@ public class ProfileFragment extends Fragment{
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
+    // this method will change user password
     private void changePassword() {
 
         //URL
@@ -271,10 +284,10 @@ public class ProfileFragment extends Fragment{
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if(checkConnectivity()){
-                            Toast.makeText(getActivity().getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_SHORT).show();
+                        if(network.checkConnectivity()){
+                            Toast.makeText(getActivity().getApplicationContext(), "There is problem with server, we apologize for this inconvenience.", Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Connection timed out, check your network.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Connection timed out, check your network.", Toast.LENGTH_LONG).show();
                         }
                         bar_change.setVisibility(View.INVISIBLE);
                     }
@@ -292,26 +305,6 @@ public class ProfileFragment extends Fragment{
 
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        NetworkInfo wifiConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        NetworkInfo mobileConn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if((wifiConn != null && wifiConn.isConnected()) || (mobileConn !=null && mobileConn.isConnected())){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    // If user is connected to network we want to check if it is connected to internet
-    public boolean checkConnectivity(){
-        try {
-            String command = "ping -c 1 google.com";
-            return (Runtime.getRuntime().exec(command).waitFor() == 1);
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
 }

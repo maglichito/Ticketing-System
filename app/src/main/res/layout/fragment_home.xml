@@ -1,18 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mypackage"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/home_fragment"
     android:background="@drawable/homebg">
-
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/swipeToRefresh">
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></View>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
+        <RelativeLayout
+            android:id="@+id/home_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/next_fixtures"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/next"
+                            android:layout_alignParentRight="true">
+                        </ImageView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                        <TextView
+                            android:id="@+id/matchweek"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CURRENT MATCHWEEK"
+                            android:layout_below="@+id/header"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/cabin"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentLeft="true"/>
+                        <TextView
+                            android:id="@+id/see_all_fixtures"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ALL FIXTURES"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/cabin"
+                            android:layout_alignParentRight="true"
+                            android:visibility="visible"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="5dp" />
+                </RelativeLayout>
+        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/main_progress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            ></ProgressBar>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_view"
+            android:layout_below="@id/home_header">
+        </ListView>
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/cabin"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"/>
 </RelativeLayout>

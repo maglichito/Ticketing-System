@@ -18,10 +18,10 @@ public class SplashActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         final Handler handler = new Handler();
+        // Show splash for 3 seconds
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Do something after 3s = 3000ms
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
             }
