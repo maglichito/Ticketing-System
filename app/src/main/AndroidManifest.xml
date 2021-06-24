@@ -27,8 +27,7 @@
             android:name=".RegisterActivity"
             android:configChanges="orientation"
             android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CardView.Light" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation"
