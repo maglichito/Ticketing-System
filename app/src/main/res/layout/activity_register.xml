@@ -136,9 +136,9 @@
             android:background="@drawable/edit_text_bg"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintWidth_percent=".8"
-            android:maxLength="30"
+            android:maxLength="40"
             android:singleLine="true"
-            android:fontFamily="@font/cabin"/>
+            android:fontFamily="@font/cabin"/>0
         <EditText
             android:id="@+id/password_register"
             android:layout_width="0dp"
