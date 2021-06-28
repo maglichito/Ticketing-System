@@ -14,12 +14,16 @@ public class API {
     public String pass_change = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/change_password.php"; //change password
     public String prof_change = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/change_profile.php"; //change profile
     public String fixtures = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/fixtures.php"; //get all fixtures
+    public String buy_ticket = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/buy_ticket.php"; //buy ticket
+    public String my_tickets = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/my_tickets.php"; //get my tickets
 
     public String getLogin() {return login; }
     public String getSignup() {return signup; }
     public String getPass_change() {return pass_change; }
     public String getProf_change() {return prof_change; }
     public String getFixtures() {return fixtures; }
+    public String getBuy_ticket() {return buy_ticket; }
+    public String getMy_tickets() {return my_tickets; }
 
 }
 
