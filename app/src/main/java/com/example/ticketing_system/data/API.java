@@ -16,6 +16,7 @@ public class API {
     public String fixtures = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/fixtures.php"; //get all fixtures
     public String buy_ticket = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/buy_ticket.php"; //buy ticket
     public String my_tickets = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/my_tickets.php"; //get my tickets
+    public String available_tickets = "https://ticketingsystemfscg.000webhostapp.com/ticketing_api/available_tickets.php"; //get my tickets
 
     public String getLogin() {return login; }
     public String getSignup() {return signup; }
@@ -24,6 +25,7 @@ public class API {
     public String getFixtures() {return fixtures; }
     public String getBuy_ticket() {return buy_ticket; }
     public String getMy_tickets() {return my_tickets; }
+    public String getAvailable_tickets() {return available_tickets; }
 
 }
 
