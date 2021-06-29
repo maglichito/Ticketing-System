@@ -40,6 +40,14 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:layout_alignParentLeft="true"/>
+
+                        <ImageView
+                            android:id="@+id/current_fixtures"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                           android:layout_toRightOf="@id/matchweek"
+                            android:src="@drawable/down"
+                            android:layout_marginTop="10dp"></ImageView>
                         <TextView
                             android:id="@+id/see_all_fixtures"
                             android:layout_width="wrap_content"

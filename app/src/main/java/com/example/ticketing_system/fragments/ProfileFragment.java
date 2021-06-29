@@ -199,6 +199,7 @@ public class ProfileFragment extends Fragment{
                                 bar.setVisibility(View.INVISIBLE);
                             }
                         } catch (JSONException e) {
+                            Toast.makeText(getActivity().getApplicationContext(),"Server side error.", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -277,6 +278,7 @@ public class ProfileFragment extends Fragment{
                                 bar_change.setVisibility(View.INVISIBLE);
                             }
                         } catch (JSONException e) {
+                            Toast.makeText(getActivity().getApplicationContext(),"Server side error.", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }

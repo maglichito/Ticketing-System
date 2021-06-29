@@ -135,11 +135,8 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             //if no error in response
                             if (!obj.getJSONObject("response").getBoolean("error")) {
-
                                 //getting the user from the response
                                 JSONObject userJson = obj.getJSONObject("user");
-
-
 
                                 //creating a new user object
                                 User user = new User(
@@ -161,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                                 bar.setVisibility(View.INVISIBLE);
                             }
                         } catch (JSONException e) {
+                            Toast.makeText(getApplicationContext(),"Server side error.", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }

@@ -162,6 +162,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 bar.setVisibility(View.INVISIBLE);
                             }
                         } catch (JSONException e) {
+                            Toast.makeText(getApplicationContext(),"Server side error.", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
