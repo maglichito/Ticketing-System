@@ -34,7 +34,7 @@
 <script>
     const $$ = e => document.querySelector(e);
 
-    //validacija polja
+    //validation
     const validate_fields = function (){
 
         const username = $$('#username').value;
@@ -55,7 +55,7 @@
         return username && password;
     }
 
-    //provjera admina
+    //check admin
     const login = function () {
         $.ajax({
             type: 'post',

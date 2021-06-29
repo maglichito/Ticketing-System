@@ -10,14 +10,14 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
 
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-    #ako se ne proslijedi id korisnika
+    #if id is empty
     if(empty($_GET['id'])){
         die();
     }
 
     global $dbConn;
 
-    #provjerimo da li je korisnik aktivan ili nije
+    #check if user is active or not
     $sql = $dbConn -> prepare("SELECT is_active FROM user WHERE id = :id  ");
     $sql -> execute([
         "id" => $_GET['id']
@@ -25,8 +25,8 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
     $isActive = $sql -> fetchColumn();
 
-    #ako je korisnik aktivan onda ga deaktiviraj
-    #ako je korinsik deaktivan onda ga aktiviraj
+    #if user is_active == 0 then activate
+    #if user is_active == 1 then deactivate
     if($isActive === 1){
         $sql = $dbConn -> prepare("UPDATE user SET is_active = 0 WHERE id = :id  ");
     }else{

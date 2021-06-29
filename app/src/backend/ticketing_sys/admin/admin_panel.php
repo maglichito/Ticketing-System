@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     global $results;
 
-    #uzemmo vrijednosti iz filtera
+    #take values from filters
     $firstname = $_POST['firstname'] ?? '';
     $lastname = $_POST['lastname'] ?? '';
     $username = $_POST['username'] ?? '';
@@ -27,8 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $statement = "SELECT * FROM user WHERE first_name LIKE '" . $firstname . "%' AND last_name LIKE '" . $lastname . "%' AND username LIKE '" . $username . "%' AND email LIKE '" . $email . "%' AND created_at LIKE '" . $created_at . "%'";
 
-    #ako se is_active ne postavi da vraca sve
-    #inace vrati od vrijednosti koja je proslijedjena
+    #setting is_active if it is not set in filters
     if ($_POST['is_active'] !== '') {
         $is_active = intval($_POST['is_active']);
         $statement .= " and is_active = " . $is_active;
@@ -117,7 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     const $$ = e => document.querySelector(e);
 
     const filter_data = function () {
-
         $.ajax({
             type: 'post',
             url: 'admin_panel.php',

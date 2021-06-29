@@ -2,34 +2,35 @@
 
 require "db.php";
 
-#validacija polja
+#validate fields
 function validate(){
     global $errors;
+
     if(empty($_POST['firstname'])){
-        return "Ime je obavezno polje!";
+        return "Firstname is required";
     }
 
     if(empty($_POST['lastname'])){
-        return "Prezime je obavezno polje!";
+        return "Lastname is required";
     }
 
     if(empty($_POST['email'])){
-       return "Email je obavezno polje!";
+       return "Email is required";
     }
 
     if(empty($_POST['username'])){
-        return "Korisnicko ime je obavezno polje!";
+        return "Username is required";
     }
 
-    if(empty($_POST['password']) || strlen($_POST['password']) < 5 || strlen($_POST['password']) > 15 ){
-        return "Lozinka je obavezno polje!";
+    if(empty($_POST['password']) || strlen($_POST['password']) < 5 || strlen($_POST['password']) > 15){
+        return "Password is required";
     }
 }
 
-#upisivanje u bazu novog korisnika
+#insert new user
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     global $dbConn;
-    #provjera da li se username vec koristi
+    #check if username already exist in db
     if(isset($_POST['username'])){
 
         $username = $_POST['username'];
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user_exist) {
 
             $error["status"] = "409";
-            $error["message"] = "Korisnicko ime je u upotrebi!";
+            $error["message"] = "Username is already in use";
             $error["error"] = true;
 
             $response["response"] = $error;
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    #provjera da li se email vec koristi
+    #check if email already exist
     if(isset($_POST['email'])){
 
         $email = $_POST['email'];
@@ -66,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email_exists = $sql -> fetchAll();
 
         if($email_exists){
-            $error["status"] = "409";
-            $error["message"] = "Email je u upotrebi!";
+            $error["status"] = 409;
+            $error["message"] = "Email is already in use";
             $error["error"] = true;
 
             $response["response"] = $error;
@@ -77,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    #ukoliko nema gresaka korisnik ce se registrovati
+    #validation successfull
     if(!validate()){
         global $dbConn;
         $sql = $dbConn->
@@ -91,16 +92,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
             ]);
 
-            $error["status"] = "200";
-            $error["message"] = "Uspjesna registracija!";
+            $error["status"] = 200;
+            $error["message"] = "Succcess";
             $error["error"] = false;
 
             $response["response"] = $error;
             echo json_encode($response);
             die();
         }catch (Exception $e){
-            $error["status"] = "500";
-            $error["message"] = "Doslo je do greske!";
+            $error["status"] = 500;
+            $error["message"] = "Error";
             $error["error"] = true;
 
             $response["response"] = $error;
@@ -108,8 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die();
         }
     }else{
-        #ako nisu popunjena sva polja
-        $error["status"] = "405";
+        #if not all fields filled
+        $error["status"] = 405;
         $error["message"] = validate();
         $error["error"] = true;
 
